@@ -1,0 +1,177 @@
+/* Reset some default styles */
+body, h1, p, button {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Loader styles */
+#loader {
+  display: none;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto; /* Center the loader horizontally */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pagination styles */
+#pagination {
+  margin-top: 20px;
+  text-align: center; /* Center the pagination buttons */
+}
+
+#pagination button {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Add styles for active pagination button */
+#pagination button.active {
+  background-color: white;
+  color: black;
+  border: 1px solid #4CAF50;
+}
+
+/* Repositories styles */
+#user-profile-container {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center; /* Center the content along the x-axis */
+ 
+  align-content: center;
+ 
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#user-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-avatar img {
+  width: 120px; /* Adjust the size as needed */
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px; /* Add margin at the bottom for better spacing */
+}
+#user-info {
+  flex-grow: 1;
+}
+
+
+#user-profile h2 {
+  margin-bottom: 8px;
+}
+
+#user-profile p {
+  margin-bottom: 8px;
+}
+
+#repositories-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.repository-container {
+  border: 2px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.repository-container h2 {
+  margin-bottom: 8px;
+}
+
+.repository-container p {
+  margin-bottom: 8px;
+}
+
+.repository-topics {
+  margin-top: 8px;
+}
+
+.topic-tag {
+  display: inline-block;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 4px;
+  color: white;
+  background-color: #3498db;
+}
+
+.topic-tag + .topic-tag {
+  box-shadow: 4px 0 0 #fff, -4px 0 0 #fff;
+}
+
+/* Add individual background colors for each topic */
+.topic-javascript {
+  background-color: #f0db4f;
+}
+
+.topic-html {
+  background-color: #e34c26;
+}
+
+.topic-css {
+  background-color: #2965f1;
+}
+
+/* Add more classes for other topics as needed */
+#user-profile-container {
+  margin-bottom: 20px;
+}
+
+#user-profile {
+  display: flex;
+}
+
+#user-avatar img {
+  width: 80px; /* Adjust the size as needed */
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+#user-info {
+  flex-grow: 1;
+}
+
+#user-profile h2 {
+  margin-bottom: 8px;
+}
+
+#user-profile p {
+  margin-bottom: 8px;
+}
