@@ -1,187 +1,126 @@
-let isLoading = false;
-const reposPerPage = 10; // Fixed number of repositories per page
+const APIURL = 'https://api.github.com/users/';
 
-function fetchRepositories(page = 1) {
-  if (isLoading) {
-    return;
-  }
+const main = document.getElementById('main');
+const form = document.getElementById('form');
+const search = document.getElementById('search');
+const flag=true;
 
-  const username = document.getElementById('username').value;
+// Dark mode toggle functionality
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
 
-  if (!username) {
-    alert('Please enter a GitHub username.');
-    return;
-  }
-
-  const userUrl = `https://api.github.com/users/${username}`;
-  const reposUrl = `https://api.github.com/users/${username}/repos?per_page=${reposPerPage}&page=${page}`;
-
-  isLoading = true;
-  showLoader();
-
-  // Fetch user profile information
-  fetch(userUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`GitHub API Error: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((user) => {
-      displayUserProfile(user);
-    })
-    .catch((error) => {
-      alert(`Error fetching user profile: ${error.message}`);
-    });
-
-  // Fetch repositories
-  fetch(reposUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`GitHub API Error: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((repositories) => {
-      displayRepositories(repositories);
-      displayPagination(repositories, page);
-    })
-    .catch((error) => {
-      alert(`Error fetching repositories: ${error.message}`);
-    })
-    .finally(() => {
-      isLoading = false;
-      hideLoader();
-    });
-}
-
-function displayUserProfile(user) {
-  const userProfileContainer = document.getElementById('user-profile-container');
-  userProfileContainer.innerHTML = '';
-
-  const userProfile = document.createElement('div');
-  userProfile.id = 'user-profile';
-
-  const userAvatar = document.createElement('div');
-  userAvatar.id = 'user-avatar';
-  const avatarImage = document.createElement('img');
-  avatarImage.src = user.avatar_url;
-  avatarImage.alt = 'Profile Picture';
-  userAvatar.appendChild(avatarImage);
-
-  const userInfo = document.createElement('div');
-  userInfo.id = 'user-info';
-
-  const userHeader = document.createElement('div');
-  userHeader.id = 'user-header';
-  const userName = document.createElement('h2');
-  userName.textContent = user.login;
-  userHeader.appendChild(userName);
-
-  const githubLink = document.createElement('p');
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
   
-  githubLink.innerHTML = `<i class="fa fa-link" aria-hidden="true"></i> <a href="${user.html_url}" target="_blank">${user.html_url}</a>`;
-  userHeader.appendChild(githubLink);
-
-  userInfo.appendChild(userHeader);
-
-  const userBio = document.createElement('p');
-  userBio.textContent = user.bio || 'No bio available';
-  userInfo.appendChild(userBio);
-
-  const userLocation = document.createElement('p');
-  userLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${user.location || 'Not specified'}`;
-  userInfo.appendChild(userLocation);
-
-  const userTwitter = document.createElement('p');
-  userTwitter.innerHTML = `Twitter: ${user.twitter_username ? `<a href="https://twitter.com/${user.twitter_username}" target="_blank">${user.twitter_username}</a>` : 'Not specified'}`;
-  userInfo.appendChild(userTwitter);
-
-  userProfile.appendChild(userAvatar);
-  userProfile.appendChild(userInfo);
-
-  userProfileContainer.appendChild(userProfile);
-}
-
-function displayRepositories(repositories) {
-  const repositoriesList = document.getElementById('repositories-list');
-  repositoriesList.innerHTML = '';
-
-  if (repositories.length === 0) {
-    repositoriesList.innerHTML = '<p>No repositories found.</p>';
-    return;
-  }
-
-  // Create a container for repositories
-  const repositoriesContainer = document.createElement('div');
-  repositoriesContainer.id = 'repositories-container';
-
-  repositories.forEach((repo, index) => {
-    const repoContainer = document.createElement('div');
-    repoContainer.className = 'repository-container';
-
-    const repoName = document.createElement('h2');
-    repoName.textContent = repo.name;
-    repoContainer.appendChild(repoName);
-
-    // Add repository description
-    const repoDescription = document.createElement('p');
-    repoDescription.textContent = repo.description || 'No description available';
-    repoContainer.appendChild(repoDescription);
-
-    const repoTopics = document.createElement('div');
-    repoTopics.className = 'repository-topics';
-
-    // Join the topics with spaces
-    const topicsText = repo.topics.join(' ');
-
-    // Split topics and create individual span elements
-    const topicsArray = repo.topics.map(topic => {
-      const topicSpan = document.createElement('span');
-      topicSpan.className = 'topic-tag';
-      topicSpan.textContent = topic;
-      return topicSpan;
-    });
-
-    repoTopics.append(...topicsArray);
-
-    repoContainer.appendChild(repoTopics);
-
-    repositoriesContainer.appendChild(repoContainer);
-  });
-
-  repositoriesList.appendChild(repositoriesContainer);
-
-  // Show pagination after fetching repositories
-  document.getElementById('pagination').style.display = 'block';
-}
-
-function displayPagination(repositories, currentPage) {
-    const totalPages = Math.ceil(repositories.length / reposPerPage);
-  
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-  
-    for (let i = 1; i <= 10; i++) {
-      const pageButton = document.createElement('button');
-      pageButton.textContent = i;
-      pageButton.onclick = () => navigatePages(i);
-      if (i === currentPage) {
-        pageButton.classList.add('active');
-      }
-      pagination.appendChild(pageButton);
+    const darkModeToggleBtn = document.getElementsByClassName("dark-mode-toggle")[0];
+    if (flag) {
+      darkModeToggleBtn.innerText = 'Dark-mode';
+      return;
     }
-  }
+    if (!flag) {
+      darkModeToggleBtn.innerText = 'Light-mode';
+      return;
+    }
+  });
   
-  function navigatePages(page) {
-    fetchRepositories(page);
-  }
-  
-  function showLoader() {
-    document.getElementById('loader').style.display = 'block';
-  }
-  
-  function hideLoader() {
-    document.getElementById('loader').style.display = 'none';
-  }
-  
+
+async function getUser(username) {
+    try {
+        const { data } = await axios(APIURL + username);
+        createUserCard(data);
+        console.log(data);
+        getRepos(username);
+    } catch (err) {
+        if (err.response && err.response.status === 404) {
+            createErrorCard('No profile with this Username');
+        } else {
+            createErrorCard('An error occurred while fetching data');
+        }
+    }
+}
+
+async function getRepos(username, page = 1, perPage = 5, sort = 'created') {
+    try {
+        const { data } = await axios(`${APIURL}${username}/repos?sort=${sort}&page=${page}&per_page=${perPage}`);
+        addReposToCard(data);
+    } catch (err) {
+        createErrorCard('Problem Fetching Repos');
+    }
+}
+
+function createUserCard(user) {
+    const cardHTML = `
+        <div class="card">
+            <div>
+                <img src="${user.avatar_url}" alt="${user.login}" class="avatar">
+            </div>
+            <div class="user-info">
+                <h2>${user.login}</h2>
+                <p>${user.html_url}</p>
+                <ul>
+                    <li>${user.followers} <strong>Followers</strong></li>
+                    <li>${user.following} <strong>Following</strong></li>
+                    <li>${user.public_repos} <strong>Repos</strong></li>
+                </ul>
+
+                <div id="repos"></div>
+                <button id="showMoreBtn" onclick="showAllRepos('${user.login}')">Show More</button>
+            </div>
+        </div>
+    `;
+    main.innerHTML = cardHTML;
+}
+
+function createErrorCard(msg) {
+    const cardHTML = `
+        <div class="card">
+            <h1>${msg}</h1>
+        </div>
+    `;
+    main.innerHTML = cardHTML;
+}
+
+function addReposToCard(repos) {
+    const reposEl = document.getElementById('repos');
+
+    reposEl.innerHTML = ''; // Clear previous repos
+
+    repos.forEach(repo => {
+        const repoEl = document.createElement('a');
+        repoEl.classList.add('repo');
+        repoEl.href = repo.html_url;
+        repoEl.target = '_blank';
+        repoEl.innerText = repo.name;
+
+        reposEl.appendChild(repoEl);
+    });
+}
+
+async function showAllRepos(username) {
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    const showAll = !showMoreBtn.classList.contains('show-all');
+    showMoreBtn.textContent = showAll ? 'Show Less' : 'Show More';
+    showMoreBtn.classList.toggle('show-all');
+
+    // Use the "showAll" flag to determine whether to load all repos or reset to the first page
+    if (showAll) {
+        // Load all repos
+        const { data } = await axios(`${APIURL}${username}/repos?sort=created&per_page=100`);
+        addReposToCard(data);
+    } else {
+        // Reset to the first page
+        getRepos(username);
+    }
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const user = search.value;
+
+    if (user) {
+        getUser(user);
+
+        search.value = '';
+    }
+});
