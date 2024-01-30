@@ -1,177 +1,181 @@
-/* Reset some default styles */
-body, h1, p, button {
-  margin: 0;
-  padding: 0;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* Loader styles */
-#loader {
-  display: none;
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 20px auto; /* Center the loader horizontally */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Pagination styles */
-#pagination {
-  margin-top: 20px;
-  text-align: center; /* Center the pagination buttons */
-}
-
-#pagination button {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-/* Add styles for active pagination button */
-#pagination button.active {
-  background-color: white;
-  color: black;
-  border: 1px solid #4CAF50;
-}
-
-/* Repositories styles */
-#user-profile-container {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center; /* Center the content along the x-axis */
- 
-  align-content: center;
- 
-  padding: 10px;
-  box-sizing: border-box;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-#user-profile {
+  background-color: #9292e2;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
 }
 
-#user-avatar img {
-  width: 120px; /* Adjust the size as needed */
-  border-radius: 50%;
-  margin-right: 20px;
-  margin-top: 40px;
-  margin-bottom: 20px; /* Add margin at the bottom for better spacing */
-}
-#user-info {
-  flex-grow: 1;
-}
-
-
-#user-profile h2 {
-  margin-bottom: 8px;
-}
-
-#user-profile p {
-  margin-bottom: 8px;
-}
-
-#repositories-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.repository-container {
-  border: 2px solid black;
-  padding: 10px;
-  box-sizing: border-box;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.repository-container h2 {
-  margin-bottom: 8px;
-}
-
-.repository-container p {
-  margin-bottom: 8px;
-}
-
-.repository-topics {
-  margin-top: 8px;
-}
-
-.topic-tag {
-  display: inline-block;
-  padding: 8px;
-  margin: 4px;
-  border-radius: 4px;
-  color: white;
-  background-color: #3498db;
-}
-
-.topic-tag + .topic-tag {
-  box-shadow: 4px 0 0 #fff, -4px 0 0 #fff;
-}
-
-/* Add individual background colors for each topic */
-.topic-javascript {
-  background-color: #f0db4f;
-}
-
-.topic-html {
-  background-color: #e34c26;
-}
-
-.topic-css {
-  background-color: #2965f1;
-}
-
-/* Add more classes for other topics as needed */
-#user-profile-container {
-  margin-bottom: 20px;
-}
-
-#user-profile {
+.user-form {
+  max-width: 700px;
+  width: 100%;
+  margin-bottom: 2rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#user-avatar img {
-  width: 80px; /* Adjust the size as needed */
+.user-form input {
+  width: 100%;
+  display: block;
+  background-color: #b9e9e97a;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(0,0,0,0.1);
+}
+
+.user-form .dark-mode input .dark-mode {
+  width: 100%;
+  display: block;
+  background-color: #3c6ef87a;
+  border: none;
+  border-radius: 10px;
+  color: #1d0c0c;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(0,0,0,0.1);
+}
+
+.user-form button {
+  width: 20%;
+  display: block;
+  cursor: pointer;
+  background-color: #097a1c;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.5rem 0.5rem;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(0,0,0,0.1);
+}
+
+.user-form button:hover {
+  width: 20%;
+  display: block;
+  cursor: pointer;
+  background-color: #28065f;
+  border: none;
+  border-radius: 10px;
+  color: #f1f0df;
+  padding: 0.5rem ;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(0,0,0,0.1);
+}
+
+.user-form input::placeholder {
+  color: #080404;
+}
+
+.user-form input:focus {
+  outline: none;
+}
+
+.card {
+  max-width: 800px;
+  background-color: #4c2885;
+  border-radius: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+  0 15px 40px rgba(0,0,0,0.1);
+  display: flex;
+  padding: 3rem;
+  margin: 0 1.5rem;
+}
+
+.avatar {
   border-radius: 50%;
-  margin-right: 20px;
+  border: 10px solid #2a2a72;
+  height: 150px;
+  width: 150px;
 }
 
-#user-info {
-  flex-grow: 1;
+.user-info {
+  color: #eee;
+  margin-left: 2rem;
 }
 
-#user-profile h2 {
-  margin-bottom: 8px;
+.user-info h2 {
+  margin-top: 0;
 }
 
-#user-profile p {
-  margin-bottom: 8px;
+.user-info ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  max-width: 400px;
+}
+
+.user-info ul li {
+  display: flex;
+  align-items: center;
+}
+
+.user-info ul li strong {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.repo {
+  text-decoration: none;
+  color: #fff;
+  background-color: #212a72;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+@media (max-width: 500px) {
+  .card {
+      flex-direction: column;
+      align-items: center;
+  }
+  .user-form {
+      max-width: 400px;
+  }
+}
+
+/* Add dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #fff;
+}
+
+/* Add styles for dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
