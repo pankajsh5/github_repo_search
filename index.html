@@ -1,48 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Repositories Viewer</title>
-  <link rel="stylesheet" href="styles.css">
-  <!-- Include Font Awesome -->
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Profiles</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  <div class="container">
-    <h1>GitHub Repositories</h1>
-    <label for="username">Enter GitHub username:</label>
-    <input type="text" id="username" placeholder="e.g., johnpapa">
-    <button onclick="fetchRepositories()">Get Repositories</button>
+    <form class="user-form" id="form">
+        <input type="text" id="search" placeholder="Search a Github User">
+        <button type="submit">Search</button>
+    </form>
 
-    <!-- Loader -->
-    <div id="loader" class="hidden"></div>
+    <main id="main"></main>
 
-    <!-- User Profile -->
-    <div id="user-profile-container"></div>
+    <!-- Dark mode toggle button -->
+    <button id="darkModeToggle" class="dark-mode-toggle">Dark-mode</button>
 
-    <!-- Repositories List -->
-    <div id="repositories-list"></div>
-
-    <!-- Pagination -->
-    <div id="pagination" style="display: none;">
-      <button onclick="navigatePages(1)">1</button>
-      <button onclick="navigatePages(2)">2</button>
-      <button onclick="navigatePages(3)">3</button>
-      <button onclick="navigatePages(4)">4</button>
-      <button onclick="navigatePages(5)">5</button>
-      <button onclick="navigatePages(6)">6</button>
-      <button onclick="navigatePages(7)">7</button>
-      <button onclick="navigatePages(8)">8</button>
-      <button onclick="navigatePages(9)">9</button>
-      <button onclick="navigatePages(10)">10</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
